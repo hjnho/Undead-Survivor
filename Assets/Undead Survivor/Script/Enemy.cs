@@ -58,4 +58,26 @@ public class Enemy : MonoBehaviour
         health = data.health;
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        health -= collision.GetComponent<Bullet>().damage;
+       
+        if(health > 0)
+        {// live, hit action
+
+        }
+        else
+        { // die
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
