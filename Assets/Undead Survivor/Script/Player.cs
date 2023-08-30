@@ -32,11 +32,16 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         inputVec = value.Get<Vector2>();
     }
 
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
 
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         //Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime; // 피타고라스 정의
@@ -57,6 +62,9 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         anim.SetFloat("Speed", inputVec.magnitude); //magnitude : 벡터의 순수한 크기 값
 
         if (inputVec.x != 0)
